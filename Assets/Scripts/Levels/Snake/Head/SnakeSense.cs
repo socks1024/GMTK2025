@@ -28,4 +28,13 @@ public class SnakeSense : MonoBehaviour
 
         return null;
     }
+
+    public virtual bool SnakeEatTail(Vector2 direction)
+    {
+        LayerMask mask = 1 << LayerMask.NameToLayer("SnakeTail");
+
+        RaycastHit2D hit = Physics2D.Raycast(_eyeTransform.position, direction.normalized, 1f, mask);
+
+        return hit.collider != null && hit.collider.gameObject.GetComponentInParent<SnakeTail>();
+    }
 }

@@ -30,7 +30,7 @@ public class PlayerPrefFullScreen : PlayerPrefSavableToggle
 
     protected override bool DefaultValue => true;
 
-    protected override void OnSetUI(bool value)
+    protected override void OnHandlerInput(bool value)
     {
         if (value)
         {

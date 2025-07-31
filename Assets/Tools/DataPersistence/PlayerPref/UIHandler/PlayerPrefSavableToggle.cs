@@ -6,7 +6,7 @@ namespace Tools.DataPersistence.PlayerPref {
         public override void ConnectEvent(Toggle eventHandler)
         {
             base.ConnectEvent(eventHandler);
-            eventHandler.onValueChanged.AddListener(OnSetUI);
+            eventHandler.onValueChanged.AddListener(OnHandlerInput);
         }
 
         protected override bool ConvertValue(string value)
@@ -14,7 +14,7 @@ namespace Tools.DataPersistence.PlayerPref {
             return System.Convert.ToBoolean(value);
         }
 
-        protected override void SetUIObject(bool value)
+        protected override void SetHandler(bool value)
         {
             _currEventHandler.isOn = value;
         }

@@ -5022,7 +5022,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_text: '
+=======
+  m_text: 'Start
+>>>>>>> Stashed changes
 =======
   m_text: 'Start
 >>>>>>> Stashed changes

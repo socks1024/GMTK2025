@@ -42,6 +42,8 @@ public class SnakeSense : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(_eyeTransform.position, direction.normalized, 1f, mask);
 
+        _animator.Play("Eat");
+
         return hit.collider != null && hit.collider.gameObject.GetComponentInParent<SnakeTail>();
     }
 }

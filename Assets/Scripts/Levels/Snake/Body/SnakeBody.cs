@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(SnakeBehaviour))]
+[RequireComponent(typeof(SnakeBehaviour), typeof(SnakePaint))]
 public class SnakeBody : MonoBehaviour
 {
     [HideInInspector]
@@ -11,9 +11,15 @@ public class SnakeBody : MonoBehaviour
 
     protected SnakeBehaviour _snakeBehaviour;
 
+    protected SnakePaint _snakePaint;
+
+    protected SpriteRenderer _sr;
+
     protected virtual void Awake()
     {
         _snakeBehaviour = GetComponent<SnakeBehaviour>();
+        _snakePaint = GetComponent<SnakePaint>();
+        _sr = GetComponentInChildren<SpriteRenderer>();
     }
 
     protected virtual void OnDestroy()
@@ -35,6 +41,11 @@ public class SnakeBody : MonoBehaviour
     {
         Vector2 vec = PrevBody.transform.position - transform.position;
 
-		_snakeBehaviour.Move(vec, wait, canUndo);
+        _snakeBehaviour.Move(vec, wait, canUndo);
+    }
+
+    public void RepaintBody(Vector3 prevPos, Vector3 nextPos)
+    {
+        _snakePaint.RepaintBody(prevPos - transform.position, nextPos - transform.position, _sr);
     }
 }

@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 743105776368503742}
   - component: {fileID: 9099415745939488230}
   - component: {fileID: 782941349596404316}
+  - component: {fileID: 4166192206197664249}
   m_Layer: 12
   m_Name: SnakeBody
   m_TagString: Untagged
@@ -516,3 +517,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PrevBody: {fileID: 0}
+--- !u!114 &4166192206197664249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5005751463185672311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca2de8d8057f9df439c0ebefefa10538, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StraightBody: {fileID: 1768065790, guid: 1fa4526eb62b38b4995d19b0084a986e, type: 3}
+  BentBody: {fileID: -1797931068, guid: 1fa4526eb62b38b4995d19b0084a986e, type: 3}

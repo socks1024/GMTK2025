@@ -49,6 +49,11 @@ public class SnakeHead : SnakeBody
         OnEatTail += LevelManager.Instance.CompleteCurrLevel;
     }
 
+    void Update()
+    {
+        Repaint();
+    }
+
     public void Undo()
     {
         this.UndoBehaviour();
@@ -95,13 +100,13 @@ public class SnakeHead : SnakeBody
                 _bodies.Insert(0, body);
             }
         }
-
-        Repaint();
     }
 
     public SnakeBody SpawnBody()
     {
-        SnakeBody newBody = Instantiate(BodyPrefab, transform.parent);
+        SnakeBody newBody = Instantiate(BodyPrefab, transform.position, Quaternion.identity);
+
+        newBody.transform.SetParent(transform.parent);
 
         if (_bodies.Count > 0)
         {
@@ -125,7 +130,46 @@ public class SnakeHead : SnakeBody
 
     public void Repaint()
     {
+        if (_bodies.Count > 0)
+        {
+            this.RepaintHead(_bodies[0].transform.position);
 
+            if (_bodies.Count == 1)
+            {
+                _bodies[0].RepaintBody(transform.position, _tail.transform.position);
+            }
+            else
+            {
+                for (int i = 0; i < _bodies.Count; i++)
+                {
+                    if (i == 0)
+                    {
+                        _bodies[i].RepaintBody(transform.position, _bodies[i + 1].transform.position);
+                    }
+                    else if (i == _bodies.Count - 1)
+                    {
+                        _bodies[i].RepaintBody(_bodies[i - 1].transform.position, _tail.transform.position);
+                    }
+                    else
+                    {
+                        _bodies[i].RepaintBody(_bodies[i - 1].transform.position, _bodies[i + 1].transform.position);
+                    }
+                }
+            }
+
+            _tail.RepaintTail(_bodies[_bodies.Count - 1].transform.position);
+        }
+        else
+        {
+            this.RepaintHead(_tail.transform.position);
+
+            _tail.RepaintTail(transform.position);
+        }
+    }
+
+    public void RepaintHead(Vector3 nextPos)
+    {
+        _snakePaint.RepaintHead(nextPos - transform.position, _sr);
     }
 
     #region Inspector Field

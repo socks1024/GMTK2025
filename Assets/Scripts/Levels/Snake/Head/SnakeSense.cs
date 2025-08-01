@@ -3,7 +3,11 @@ using UnityEngine;
 public class SnakeSense : MonoBehaviour
 {
     public Transform _eyeTransform;
-
+    private Animator _animator;
+    private void Awake()
+    {
+        _animator = GetComponentInChildren<Animator>();
+    }
     public virtual bool Blocked(Vector2 direction)
     {
         LayerMask mask = 1 << LayerMask.NameToLayer("Wall") | 1 << LayerMask.NameToLayer("SnakeBody");
@@ -23,6 +27,9 @@ public class SnakeSense : MonoBehaviour
 
         if (hit.collider != null && hit.collider.gameObject.GetComponentInParent<AbstractFood>() != null)
         {
+    
+            _animator.Play("Eat");
+            
             return hit.collider.gameObject.GetComponentInParent<AbstractFood>();
         }
 

@@ -7,11 +7,12 @@ public class SnakeBody : MonoBehaviour
     [HideInInspector]
     public SnakeBody PrevBody;
 
+    [HideInInspector]
+    public SnakePaint _snakePaint;
+
     public UnityAction onDestroyAction;
 
     protected SnakeBehaviour _snakeBehaviour;
-
-    protected SnakePaint _snakePaint;
 
     protected SpriteRenderer _sr;
 
@@ -47,5 +48,10 @@ public class SnakeBody : MonoBehaviour
     public void RepaintBody(Vector3 prevPos, Vector3 nextPos)
     {
         _snakePaint.RepaintBody(prevPos - transform.position, nextPos - transform.position, _sr);
+    }
+
+    public void RepaintBody()
+    {
+        _snakePaint.RepaintBody(_sr);
     }
 }

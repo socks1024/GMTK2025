@@ -20,7 +20,7 @@ TagManager:
   - SnakeHead
   - SnakeBody
   - SnakeTail
-  - 
+  - Portal
   - 
   - 
   - 
@@ -44,4 +44,7 @@ TagManager:
     locked: 0
   - name: Snake
     uniqueID: 2831908903
+    locked: 0
+  - name: Portal
+    uniqueID: 1913053691
     locked: 0

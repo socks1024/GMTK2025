@@ -503,6 +503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb8d7634314d694885ee149661a5e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _movementSpring: {fileID: 0}
   CellSize: 1
 --- !u!114 &782941349596404316
 MonoBehaviour:
@@ -517,6 +518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PrevBody: {fileID: 0}
+  _snakePaint: {fileID: 0}
 --- !u!114 &4166192206197664249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -531,3 +533,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StraightBody: {fileID: 1768065790, guid: 1fa4526eb62b38b4995d19b0084a986e, type: 3}
   BentBody: {fileID: -1797931068, guid: 1fa4526eb62b38b4995d19b0084a986e, type: 3}
+  Posture: 6

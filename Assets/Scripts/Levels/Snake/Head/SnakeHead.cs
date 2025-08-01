@@ -17,6 +17,8 @@ public class SnakeHead : SnakeBody
 
     public UnityAction OnEatTail;
 
+    private int portalMoveCount = 0;
+
     protected override void Awake()
     {
         base.Awake();
@@ -69,12 +71,46 @@ public class SnakeHead : SnakeBody
     {
         if (_snakeView.SnakeEatTail(direction))
         {
-            OnEatTail?.Invoke();
+            if (_bodies.Count != 0) OnEatTail?.Invoke();
         }
 
         bool blocked = _snakeView.Blocked(direction);
 
-        if (blocked)
+        #region Portal
+
+        Portal portal = _snakeView.TryTeleport();
+
+        bool readyToTeleport = false;
+
+        if (portal != null)
+        {
+            if (portalMoveCount == 0)
+            {
+                direction.x = portal.AnotherPortal.transform.position.x - transform.position.x;
+                direction.y = portal.AnotherPortal.transform.position.y - transform.position.y;
+
+                readyToTeleport = true;
+            }
+
+            portalMoveCount += 1;
+        }
+        else
+        {
+            portalMoveCount = 0;
+        }
+
+        Debug.Log(portalMoveCount);
+
+        #endregion
+
+        if (readyToTeleport)
+        {
+            _snakeBehaviour.Move(direction, false, true);
+            MoveBodyAndTail(false, true);
+
+            _eatCommandInvoker.ExecuteCommand(new WaitCommand());
+        }
+        else if (blocked)
         {
             _snakeBehaviour.Move(direction, true, false);
             MoveBodyAndTail(true, false);

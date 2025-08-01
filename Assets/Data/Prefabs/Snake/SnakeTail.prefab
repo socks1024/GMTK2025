@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2863563393471503431}
   - component: {fileID: 643984944664862769}
   - component: {fileID: 7448547413702982304}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: SnakeTail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 5054518872826728188}
   - component: {fileID: 5308175637278663967}
   - component: {fileID: 3258577820809449398}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -6,7 +6,7 @@ namespace Tools.DataPersistence.PlayerPref {
         public override void ConnectEvent(Slider eventHandler)
         {
             base.ConnectEvent(eventHandler);
-            eventHandler.onValueChanged.AddListener(OnSetUI);
+            eventHandler.onValueChanged.AddListener(OnHandlerInput);
         }
 
         protected override float ConvertValue(string value)
@@ -14,7 +14,7 @@ namespace Tools.DataPersistence.PlayerPref {
             return (float)System.Convert.ToDouble(value);
         }
 
-        protected override void SetUIObject(float value)
+        protected override void SetHandler(float value)
         {
             _currEventHandler.value = value;
         }

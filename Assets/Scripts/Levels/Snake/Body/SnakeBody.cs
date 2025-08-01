@@ -31,10 +31,10 @@ public class SnakeBody : MonoBehaviour
         _snakeBehaviour.OnSpawn(head, nextBody, position);
     }
 
-    public void MoveToPrevBody(bool wait)
+    public void MoveToPrevBody(bool wait, bool canUndo = false)
     {
         Vector2 vec = PrevBody.transform.position - transform.position;
 
-		_snakeBehaviour.Move(vec, wait);
+		_snakeBehaviour.Move(vec, wait, canUndo);
     }
 }

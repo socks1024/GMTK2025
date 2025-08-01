@@ -42,93 +42,6 @@ public class MMSMAudioSetting : MonoBehaviour
     }
 }
 
-// [Serializable]
-// public class MMSMAudioSettingInfo
-// {
-//     [EnumToggleButtons]
-//     public MMSoundManager.MMSoundManagerTracks Track;
-//     public GameObject UIObject;
-
-//     public bool DefaultMute = false;
-//     public float DefaultVolume = 1f;
-
-//     private float _volume;
-//     private bool _mute;
-
-//     private Slider VolumeSlider;
-//     private Toggle MuteToggle;
-
-//     private string VolumeKey { get { return Track.ToString() + "_volume"; } }
-//     private string MuteKey { get { return Track.ToString() + "_mute"; } }
-
-//     public void InitTrackSetting()
-//     {
-//         _volume = DefaultVolume;
-//         _mute = DefaultMute;
-
-//         VolumeSlider = UIObject.GetComponentInChildren<Slider>();
-//         MuteToggle = UIObject.GetComponentInChildren<Toggle>();
-
-//         VolumeSlider?.onValueChanged.AddListener(SetVolume);
-//         MuteToggle?.onValueChanged.AddListener(SetMute);
-
-//         if (PlayerPrefs.HasKey(VolumeKey) && PlayerPrefs.HasKey(MuteKey))
-//         {
-//             _volume = PlayerPrefs.GetFloat(VolumeKey);
-//             _mute = PlayerPrefs.GetInt(MuteKey) > 0;
-//         }
-
-//         SetVolumeSlider(_volume);
-//         SetMuteToggle(!_mute);
-//     }
-
-//     public void SaveTrackSetting()
-//     {
-//         PlayerPrefs.SetFloat(VolumeKey, _volume);
-//         PlayerPrefs.SetInt(MuteKey, _mute ? 1 : 0);
-//     }
-
-//     public void ResetTrackSetting()
-//     {
-//         PlayerPrefs.SetFloat(VolumeKey, DefaultVolume);
-//         PlayerPrefs.SetInt(MuteKey, DefaultMute ? 1 : 0);
-
-//         SetVolumeSlider(DefaultVolume);
-//         SetMuteToggle(!DefaultMute);
-//     }
-
-//     private void SetVolumeSlider(float value)
-//     {
-//         VolumeSlider.value = value;
-//     }
-
-//     private void SetMuteToggle(bool isOn)
-//     {
-//         MuteToggle.isOn = isOn;
-//     }
-
-//     private void SetVolume(float value)
-//     {
-//         _volume = value;
-//         MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, Track, value);
-//     }
-
-//     private void SetMute(bool isOn)
-//     {
-//         _mute = !isOn;
-//         if (_mute)
-//         {
-//             MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.MuteTrack, Track, 0f);
-//             VolumeSlider.interactable = false;
-//         }
-//         else
-//         {
-//             MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.UnmuteTrack, Track, _volume);
-//             VolumeSlider.interactable = true;
-//         }
-//     }
-// }
-
 [Serializable]
 public class PlayerPrefSavableMMSoundManagerTrackSetting
 {
@@ -188,7 +101,7 @@ public class PlayerPrefSavableMMSoundManagerTrackVolume : PlayerPrefSavableSlide
 
     public PlayerPrefSavableMMSoundManagerTrackSetting settings;
 
-    protected override void OnSetUI(float value)
+    protected override void OnHandlerInput(float value)
     {
         _currValue = value;
         MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, Track, value);
@@ -205,7 +118,7 @@ public class PlayerPrefSavableMMSoundManagerTrackMute : PlayerPrefSavableToggle
 
     public PlayerPrefSavableMMSoundManagerTrackSetting settings;
 
-    protected override void OnSetUI(bool value)
+    protected override void OnHandlerInput(bool value)
     {
         _currValue = value;
         if (_currValue)

@@ -22,7 +22,7 @@ namespace Tools.DataPersistence.PlayerPref {
                 _currValue = DefaultValue;
             }
 
-            SetUIObject(_currValue);
+            SetHandler(_currValue);
         }
 
         public void Save()
@@ -44,8 +44,8 @@ namespace Tools.DataPersistence.PlayerPref {
 
         protected abstract T ConvertValue(string value);
 
-        protected abstract void SetUIObject(T value);
+        protected abstract void SetHandler(T value);
 
-        protected abstract void OnSetUI(T value);
+        protected abstract void OnHandlerInput(T value);
     }
 }

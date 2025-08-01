@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Tools.GameProgrammingPatterns.Command;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(SnakeInput), typeof(SnakeSense))]
 public class SnakeHead : SnakeBody
@@ -13,6 +14,8 @@ public class SnakeHead : SnakeBody
     private SnakeSense _snakeView;
 
     private SnakeEatCommandInvoker _eatCommandInvoker = new();
+
+    public UnityAction OnEatTail;
 
     protected override void Awake()
     {
@@ -40,6 +43,10 @@ public class SnakeHead : SnakeBody
         {
             _tail.PrevBody = this;
         }
+
+        LevelManager.Instance.CurrSnakeHead = this;
+
+        OnEatTail += LevelManager.Instance.OnLevelComplete;
     }
 
     public void Undo()
@@ -55,14 +62,17 @@ public class SnakeHead : SnakeBody
 
     public void MoveHead(Vector2 direction)
     {
+        if (_snakeView.SnakeEatTail(direction))
+        {
+            OnEatTail?.Invoke();
+        }
+
         bool blocked = _snakeView.Blocked(direction);
 
         if (blocked)
         {
-            _snakeBehaviour.Move(direction, true);
-            MoveBodyAndTail(true);
-
-            _eatCommandInvoker.ExecuteCommand(new WaitCommand());
+            _snakeBehaviour.Move(direction, true, false);
+            MoveBodyAndTail(true, false);
         }
         else
         {
@@ -70,8 +80,8 @@ public class SnakeHead : SnakeBody
 
             if (food is null)
             {
-                _snakeBehaviour.Move(direction, false);
-                MoveBodyAndTail(false);
+                _snakeBehaviour.Move(direction, false, true);
+                MoveBodyAndTail(false, true);
 
                 _eatCommandInvoker.ExecuteCommand(new WaitCommand());
             }
@@ -79,9 +89,9 @@ public class SnakeHead : SnakeBody
             {
                 _eatCommandInvoker.ExecuteCommand(food);
 
-                _snakeBehaviour.Move(direction, false);
+                _snakeBehaviour.Move(direction, false, true);
                 SnakeBody body = SpawnBody();
-                MoveBodyAndTail(true);
+                MoveBodyAndTail(true, true);
                 _bodies.Insert(0, body);
             }
         }
@@ -107,10 +117,10 @@ public class SnakeHead : SnakeBody
         return newBody;
     }
 
-    public void MoveBodyAndTail(bool justBump)
+    public void MoveBodyAndTail(bool justBump, bool canUndo)
     {
-        _bodies.ForEach(b => b.MoveToPrevBody(justBump));
-        _tail.MoveToPrevBody(justBump);
+        _bodies.ForEach(b => b.MoveToPrevBody(justBump, canUndo));
+        _tail.MoveToPrevBody(justBump, canUndo);
     }
 
     public void Repaint()

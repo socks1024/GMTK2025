@@ -3113,7 +3113,7 @@ MonoBehaviour:
         Owner: {fileID: 676401225}
         DebugActive: 0
         LoadingSceneName: MyAdditiveLoadingScreen
-        DestinationSceneName: TemplateLevel
+        DestinationSceneName: Level1-1
         LoadingMode: 2
         Priority: 4
         SecureLoad: 1

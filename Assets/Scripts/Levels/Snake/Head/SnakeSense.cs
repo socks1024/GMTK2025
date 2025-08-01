@@ -3,7 +3,7 @@ using UnityEngine;
 public class SnakeSense : MonoBehaviour
 {
     public Transform _eyeTransform;
-    private Animator _animator;
+    public Animator _animator;
     private void Awake()
     {
         _animator = GetComponentInChildren<Animator>();

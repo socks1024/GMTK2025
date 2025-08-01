@@ -21,16 +21,10 @@ public class VideoSetting : PlayerPrefSavableFieldContainer<PlayerPrefFullScreen
     protected override void ConnectEvent()
     {
         playerPrefFullScreen.ConnectEvent(FullScreenToggle);
+        playerPrefFullScreen.HandlerWriteValue += OnFullScreenInput;
     }
-}
 
-public class PlayerPrefFullScreen : PlayerPrefSavableToggle
-{
-    public override string PrefKey => "FullScreen";
-
-    protected override bool DefaultValue => true;
-
-    protected override void OnHandlerInput(bool value)
+    protected void OnFullScreenInput(bool value)
     {
         if (value)
         {
@@ -43,6 +37,13 @@ public class PlayerPrefFullScreen : PlayerPrefSavableToggle
             Screen.SetResolution(1920, 1080, false);
         }
     }
+}
+
+public class PlayerPrefFullScreen : PlayerPrefSavableToggle
+{
+    public override string PrefKey => "FullScreen";
+
+    protected override bool DefaultValue => true;
 }
 
 

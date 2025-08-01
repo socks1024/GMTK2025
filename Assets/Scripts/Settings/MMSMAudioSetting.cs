@@ -65,11 +65,13 @@ public class PlayerPrefSavableMMSoundManagerTrackSetting
         VolumeField.Track = Track;
         VolumeField.settings = this;
         VolumeField.ConnectEvent(slider);
+        VolumeField.HandlerWriteValue += OnVolumeInput;
         VolumeField.Load();
 
         MuteField.Track = Track;
         MuteField.settings = this;
         MuteField.ConnectEvent(toggle);
+        MuteField.HandlerWriteValue += OnMuteInput;
         MuteField.Load();
     }
 
@@ -90,6 +92,26 @@ public class PlayerPrefSavableMMSoundManagerTrackSetting
         VolumeField.Reset();
         MuteField.Reset();
     }
+
+    protected void OnVolumeInput(float value)
+    {
+        MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, Track, value);
+        _volume = value;
+    }
+
+    protected void OnMuteInput(bool value)
+    {
+        if (value)
+        {
+            MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.MuteTrack, Track, 0f);
+            slider.interactable = false;
+        }
+        else
+        {
+            MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.UnmuteTrack, Track, _volume);
+            slider.interactable = true;
+        }
+    }
 }
 
 public class PlayerPrefSavableMMSoundManagerTrackVolume : PlayerPrefSavableSlider
@@ -100,13 +122,6 @@ public class PlayerPrefSavableMMSoundManagerTrackVolume : PlayerPrefSavableSlide
     protected override float DefaultValue => 1f;
 
     public PlayerPrefSavableMMSoundManagerTrackSetting settings;
-
-    protected override void OnHandlerInput(float value)
-    {
-        _currValue = value;
-        MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, Track, value);
-        settings._volume = _currValue;
-    }
 }
 
 public class PlayerPrefSavableMMSoundManagerTrackMute : PlayerPrefSavableToggle
@@ -117,19 +132,4 @@ public class PlayerPrefSavableMMSoundManagerTrackMute : PlayerPrefSavableToggle
     protected override bool DefaultValue => false;
 
     public PlayerPrefSavableMMSoundManagerTrackSetting settings;
-
-    protected override void OnHandlerInput(bool value)
-    {
-        _currValue = value;
-        if (_currValue)
-        {
-            MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.MuteTrack, Track, 0f);
-            settings.slider.interactable = false;
-        }
-        else
-        {
-            MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.UnmuteTrack, Track, settings._volume);
-            settings.slider.interactable = true;
-        }
-    }
 }

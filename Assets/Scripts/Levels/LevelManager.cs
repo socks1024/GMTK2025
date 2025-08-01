@@ -1,39 +1,59 @@
-using System;
-using Tools.DataPersistence.PlayerPref;
+using MoreMountains.Tools;
 using Tools.GameProgrammingPatterns.Singleton;
+using UnityEngine;
 
 public class LevelManager : MonoSingleton<LevelManager>
 {
+    [HideInInspector]
     public SnakeHead CurrSnakeHead;
 
-    public void OnLevelComplete()
+    [HideInInspector]
+    public LevelInfo CurrLevel;
+
+    public void CompleteCurrLevel()
     {
+        CurrSnakeHead.GetComponent<SnakeInput>().IsActive = false;
 
-    }
-}
+        CurrLevel.UnlockNextLevel();
 
-public class PlayerPrefLevelComplete : PlayerPrefSavableField<bool, LevelManager>
-{
-    public int WorldIndex;
-
-    public int LevelIndex;
-
-    public override string PrefKey => "LevelComplete:" + WorldIndex + LevelIndex;
-
-    protected override bool DefaultValue => false;
-
-    protected override bool ConvertValue(string value)
-    {
-        return Convert.ToBoolean(value);
+        MMLoadSelectLevelScene();
     }
 
-    protected override void SetHandler(bool value)
+    #region LoadScene
+
+    private void MMLoadScene(string sceneName)
     {
-        
+        MMAdditiveSceneLoadingManagerSettings mySettings = new MMAdditiveSceneLoadingManagerSettings();
+        mySettings.LoadingSceneName = LoadingSceneName;
+        MMAdditiveSceneLoadingManager.LoadScene(sceneName, mySettings);
     }
 
-    protected override void OnHandlerInput(bool value)
+    public void MMLoadLevelScene(LevelInfo levelInfo)
     {
-        
+        CurrLevel = levelInfo;
+
+        MMLoadScene(levelInfo.LevelSceneName);
     }
+
+    public void MMLoadMainScene()
+    {
+        MMLoadScene(MainSceneName);
+    }
+
+    public void MMLoadSelectLevelScene()
+    {
+        MMLoadScene(SelectLevelSceneName);
+    }
+
+    #endregion
+
+    #region Inspector Field
+
+    public string MainSceneName;
+
+    public string SelectLevelSceneName;
+
+    public string LoadingSceneName;
+
+    #endregion
 }

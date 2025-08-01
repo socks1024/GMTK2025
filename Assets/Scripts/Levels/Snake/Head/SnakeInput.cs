@@ -12,11 +12,18 @@ public class SnakeInput : MonoBehaviour
 
     public float MoveInterval = 0.8f;
 
+    public bool IsActive = true;
+
     void Update()
     {
-        HandleUndoInput();
-		
-		HandleMoveInput();
+		if (IsActive)
+		{
+
+			HandleUndoInput();
+			
+			HandleMoveInput();
+
+		}
     }
 
     protected virtual void HandleMoveInput()

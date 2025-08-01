@@ -46,7 +46,7 @@ public class SnakeHead : SnakeBody
 
         LevelManager.Instance.CurrSnakeHead = this;
 
-        OnEatTail += LevelManager.Instance.OnLevelComplete;
+        OnEatTail += LevelManager.Instance.CompleteCurrLevel;
     }
 
     public void Undo()

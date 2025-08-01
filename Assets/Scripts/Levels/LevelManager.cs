@@ -1,4 +1,5 @@
 using MoreMountains.Tools;
+using Timers;
 using Tools.GameProgrammingPatterns.Singleton;
 using UnityEngine;
 
@@ -10,13 +11,15 @@ public class LevelManager : MonoSingleton<LevelManager>
     [HideInInspector]
     public LevelInfo CurrLevel;
 
+    public float WaitInterval = 1f;
+
     public void CompleteCurrLevel()
     {
         CurrSnakeHead.GetComponent<SnakeInput>().IsActive = false;
 
         CurrLevel.UnlockNextLevel();
 
-        MMLoadSelectLevelScene();
+        TimersManager.SetTimer(this, WaitInterval, () => MMLoadSelectLevelScene());
     }
 
     #region LoadScene

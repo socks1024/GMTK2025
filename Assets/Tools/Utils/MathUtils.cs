@@ -22,5 +22,18 @@ namespace Tools.Utils
 
             return vec;
         }
+
+        public static Vector2 RoundToInt(this Vector2 vec)
+        {
+            vec.x = Mathf.RoundToInt(vec.x);
+            vec.y = Mathf.RoundToInt(vec.y);
+
+            return vec;
+        }
+
+        public static Vector2 DiscardZ(this Vector3 vec)
+        {
+            return new Vector2(vec.x, vec.y);
+        }
     }
 }

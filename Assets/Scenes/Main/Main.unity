@@ -1470,7 +1470,6 @@ GameObject:
   - component: {fileID: 227879694}
   - component: {fileID: 227879693}
   - component: {fileID: 227879695}
-  - component: {fileID: 227879696}
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
@@ -1796,18 +1795,6 @@ MonoBehaviour:
           ButtonText: Debug Stop Sound
         ResetSequentialIndexButton:
           ButtonText: Reset Sequential Index
---- !u!114 &227879696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227879692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b25443c51e4826e4d8221192dd3f7d8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &301534911
 GameObject:
   m_ObjectHideFlags: 0

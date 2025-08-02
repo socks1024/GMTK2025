@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using Tools.GameProgrammingPatterns.Command;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,10 +13,11 @@ public class SnakeHead : SnakeBody
 
     private SnakeInput _snakeInput;
     private SnakeSense _snakeView;
+    private MMF_Player _mmf_Player;
 
     private SnakeEatCommandInvoker _eatCommandInvoker = new();
 
-    public UnityAction OnEatTail;
+    public UnityAction<int> OnEatTail;
 
     private int portalMoveCount = 0;
 
@@ -29,6 +31,8 @@ public class SnakeHead : SnakeBody
 
         _snakeView = GetComponent<SnakeSense>();
         _snakeView._eyeTransform = GetComponentInChildren<SpriteRenderer>().transform;
+
+        _mmf_Player = GetComponent<MMF_Player>();
 
         for (int i = 0; i < _bodies.Count; i++)
         {
@@ -48,7 +52,7 @@ public class SnakeHead : SnakeBody
 
         LevelManager.Instance.CurrSnakeHead = this;
 
-        OnEatTail += LevelManager.Instance.CompleteCurrLevel;
+        OnEatTail += FindAnyObjectByType<FinishScreen>().PopUp;
     }
 
     void Update()
@@ -69,12 +73,26 @@ public class SnakeHead : SnakeBody
 
     public void MoveHead(Vector2 direction)
     {
+        bool blocked = _snakeView.Blocked(direction);
+
         if (_snakeView.SnakeEatTail(direction))
         {
-            if (_bodies.Count != 0) OnEatTail?.Invoke();
-        }
+            if (_bodies.Count != 0)
+            {
+                _snakeBehaviour.Move(direction, false, true);
+                SnakeBody body = SpawnBody();
+                MoveBodyAndTail(true, true);
+                _bodies.Insert(0, body);
 
-        bool blocked = _snakeView.Blocked(direction);
+                OnEatTail?.Invoke(_bodies.Count + 2);
+
+                return;
+            }
+            else
+            {
+                blocked = true;
+            }
+        }
 
         #region Portal
 
@@ -98,8 +116,6 @@ public class SnakeHead : SnakeBody
         {
             portalMoveCount = 0;
         }
-
-        Debug.Log(portalMoveCount);
 
         #endregion
 
@@ -134,6 +150,8 @@ public class SnakeHead : SnakeBody
                 SnakeBody body = SpawnBody();
                 MoveBodyAndTail(true, true);
                 _bodies.Insert(0, body);
+                
+                _mmf_Player.PlayFeedbacks();
             }
         }
     }

@@ -26,28 +26,22 @@ namespace Tools.DataPersistence.PlayerPref {
             }
 
             SetHandler(_currValue);
-
-            Debug.Log($"---{PrefKey}:Loaded---");
         }
 
         public void Save()
         {
             PlayerPrefs.SetString(PrefKey, _currValue.ToString());
-
-            Debug.Log($"---{PrefKey}:Saved---");
         }
 
         public void Reset()
         {
             PlayerPrefs.SetString(PrefKey, DefaultValue.ToString());
 
-            Debug.Log($"---{PrefKey}:Reset---");
-
             Load();
         }
 
         /// <summary>
-        /// 连接持久化字段和字段容器，应当在初始化时调用
+        /// 连接持久化字段和字段容器，必须在初始化时调用
         /// </summary>
         /// <param name="eventHandler">字段容器</param>
         public virtual void ConnectEvent(U eventHandler)

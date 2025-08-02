@@ -51,3 +51,6 @@ TagManager:
   - name: Top
     uniqueID: 325437175
     locked: 0
+  - name: FinishScreen
+    uniqueID: 839195161
+    locked: 0

@@ -15,11 +15,22 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     public void CompleteCurrLevel()
     {
-        CurrSnakeHead.GetComponent<SnakeInput>().IsActive = false;
-
         CurrLevel.UnlockNextLevel();
 
         TimersManager.SetTimer(this, WaitInterval, () => MMLoadSelectLevelScene());
+    }
+
+    public void RestartCurrLevel()
+    {
+        MMLoadLevelScene(CurrLevel);
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RestartCurrLevel();
+        }
     }
 
     #region LoadScene

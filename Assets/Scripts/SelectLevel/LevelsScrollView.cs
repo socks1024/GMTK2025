@@ -11,4 +11,12 @@ public class LevelsScrollView : MonoBehaviour
     {
         GetComponent<ScrollRect>().horizontalNormalizedPosition = 0;
     }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            LevelManager.Instance.MMLoadMainScene();
+        }
+    }
 }

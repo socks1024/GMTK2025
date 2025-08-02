@@ -13,6 +13,14 @@ public class FinishScreen : MonoBehaviour
         _MMF_Player = GetComponent<MMF_Player>();
     }
 
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            LevelManager.Instance.MMLoadSelectLevelScene();
+        }
+    }
+
     public void PopUp(int bodyLength)
     {
         LevelManager.Instance.CurrSnakeHead.GetComponent<SnakeInput>().IsActive = false;

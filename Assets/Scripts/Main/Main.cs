@@ -6,19 +6,9 @@ using UnityEngine.SceneManagement;
 public class Main : MonoBehaviour
 {
 
-    public void ResumeGame()
+    public void LoadSelectLevel()
     {
-
-    }
-
-    public void StartNewGame()
-    {
-
-    }
-
-    public void GotoSettings()
-    {
-        
+        LevelManager.Instance.MMLoadSelectLevelScene();
     }
 
     public void QuitGame()

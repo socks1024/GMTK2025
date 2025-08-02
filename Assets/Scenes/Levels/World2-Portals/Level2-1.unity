@@ -518,6 +518,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FinishScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 4149276062725226673, guid: e6df46d8ce1dcca45bd3e3cdee128753, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
     - target: {fileID: 4471428918652641525, guid: e6df46d8ce1dcca45bd3e3cdee128753, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

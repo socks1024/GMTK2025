@@ -41,6 +41,6 @@ Material:
     - _ScanlineMove: 0
     - _ScanlineMoveSpeed: 0.01
     - _ScanlineOnOff: 1
-    - _ScanlineWeight: 0.04
+    - _ScanlineWeight: 0.02
     m_Colors: []
   m_BuildTextureStacks: []

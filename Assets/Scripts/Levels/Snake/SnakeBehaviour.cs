@@ -36,7 +36,7 @@ public class SnakeBehaviour : MonoBehaviour
 	/// </summary>
 	/// <param name="direction">移动方向</param>
 	/// <param name="wait">是否只是震动而不移动位置</param>
-	public virtual void Move(Vector2 direction, bool wait, bool canUndo = false)
+	public virtual void Move(Vector2 direction, bool wait, bool canUndo = true)
 	{
 		if (wait)
 		{

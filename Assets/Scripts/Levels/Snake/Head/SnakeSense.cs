@@ -11,7 +11,7 @@ public class SnakeSense : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
     }
 
-    public virtual bool Blocked(Vector2 direction)
+    public virtual bool CheckBlocked(Vector2 direction)
     {
         LayerMask mask = 1 << LayerMask.NameToLayer("Wall") | 1 << LayerMask.NameToLayer("SnakeBody");
 

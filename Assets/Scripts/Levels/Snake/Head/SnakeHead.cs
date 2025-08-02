@@ -12,25 +12,23 @@ public class SnakeHead : SnakeBody
     public SnakeTail _tail;
 
     private SnakeInput _snakeInput;
-    private SnakeSense _snakeView;
+    private SnakeSense _snakeSense;
     private MMF_Player _mmf_Player;
 
     private SnakeEatCommandInvoker _eatCommandInvoker = new();
 
     public UnityAction<int> OnEatTail;
 
-    private int portalMoveCount = 0;
-
     protected override void Awake()
     {
         base.Awake();
 
         _snakeInput = GetComponent<SnakeInput>();
-        _snakeInput.TriggerMove += MoveHead;
+        _snakeInput.TriggerMove += SnakeTurnProcess;
         _snakeInput.TriggerUndo += Undo;
 
-        _snakeView = GetComponent<SnakeSense>();
-        _snakeView._eyeTransform = GetComponentInChildren<SpriteRenderer>().transform;
+        _snakeSense = GetComponent<SnakeSense>();
+        _snakeSense._eyeTransform = GetComponentInChildren<SpriteRenderer>().transform;
 
         _mmf_Player = GetComponent<MMF_Player>();
 
@@ -71,11 +69,11 @@ public class SnakeHead : SnakeBody
         _eatCommandInvoker.UndoCommand();
     }
 
-    public void MoveHead(Vector2 direction)
+    public void SnakeTurnProcess(Vector2 direction)
     {
-        bool blocked = _snakeView.Blocked(direction);
+        bool blocked = _snakeSense.CheckBlocked(direction);
 
-        if (_snakeView.SnakeEatTail(direction))
+        if (_snakeSense.SnakeEatTail(direction))
         {
             if (_bodies.Count != 0)
             {
@@ -96,25 +94,24 @@ public class SnakeHead : SnakeBody
 
         #region Portal
 
-        Portal portal = _snakeView.TryTeleport();
+        Portal currPortal = _snakeSense.TryTeleport();
 
         bool readyToTeleport = false;
 
-        if (portal != null)
+        if (currPortal != null)
         {
-            if (portalMoveCount == 0)
+            Portal anotherPortal = currPortal.AnotherPortal;
+
+            if (!anotherPortal.HasBody())
             {
-                direction.x = portal.AnotherPortal.transform.position.x - transform.position.x;
-                direction.y = portal.AnotherPortal.transform.position.y - transform.position.y;
+            
+                direction.x = anotherPortal.transform.position.x - transform.position.x;
+                direction.y = anotherPortal.transform.position.y - transform.position.y;
 
                 readyToTeleport = true;
-            }
 
-            portalMoveCount += 1;
-        }
-        else
-        {
-            portalMoveCount = 0;
+            }
+            
         }
 
         #endregion
@@ -130,10 +127,12 @@ public class SnakeHead : SnakeBody
         {
             _snakeBehaviour.Move(direction, true, false);
             MoveBodyAndTail(true, false);
+
+            // 此时不会向任何命令队列压入 WaitCommand 或其他 Command，即不记录此次输入的 Command
         }
         else
         {
-            AbstractFood food = _snakeView.Eat(direction);
+            AbstractFood food = _snakeSense.Eat(direction);
 
             if (food is null)
             {
@@ -150,7 +149,7 @@ public class SnakeHead : SnakeBody
                 SnakeBody body = SpawnBody();
                 MoveBodyAndTail(true, true);
                 _bodies.Insert(0, body);
-                
+
                 _mmf_Player.PlayFeedbacks();
             }
         }

@@ -7,8 +7,6 @@ public class SnakeInput : MonoBehaviour
 
     public UnityAction TriggerUndo;
 
-    public float MoveInterval = 0.8f;
-
     public bool IsActive = true;
 
     void Update()

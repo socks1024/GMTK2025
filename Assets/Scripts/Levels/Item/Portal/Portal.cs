@@ -19,4 +19,9 @@ public class Portal : MonoBehaviour
 
         return col != null;
     }
+
+    void Start()
+    {
+        
+    }
 }

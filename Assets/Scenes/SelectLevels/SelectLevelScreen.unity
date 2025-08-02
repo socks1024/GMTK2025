@@ -142,6 +142,14 @@ PrefabInstance:
       propertyPath: Level.LevelSceneName
       value: Level1-2
       objectReference: {fileID: 0}
+    - target: {fileID: 3289542909338622417, guid: 7096f18961d9e864b82f5a95cc4e7b3f, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3289542909338622417, guid: 7096f18961d9e864b82f5a95cc4e7b3f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 343cff650edf47a47af3f5fa20d120f2, type: 3}
     - target: {fileID: 3648667790329217543, guid: 7096f18961d9e864b82f5a95cc4e7b3f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -408,6 +416,14 @@ PrefabInstance:
       propertyPath: Level.LevelSceneName
       value: Level1-5
       objectReference: {fileID: 0}
+    - target: {fileID: 3289542909338622417, guid: 7096f18961d9e864b82f5a95cc4e7b3f, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3289542909338622417, guid: 7096f18961d9e864b82f5a95cc4e7b3f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 343cff650edf47a47af3f5fa20d120f2, type: 3}
     - target: {fileID: 3648667790329217543, guid: 7096f18961d9e864b82f5a95cc4e7b3f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -853,6 +869,14 @@ PrefabInstance:
       propertyPath: Level.LevelSceneName
       value: Level1-4
       objectReference: {fileID: 0}
+    - target: {fileID: 3289542909338622417, guid: 7096f18961d9e864b82f5a95cc4e7b3f, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3289542909338622417, guid: 7096f18961d9e864b82f5a95cc4e7b3f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 343cff650edf47a47af3f5fa20d120f2, type: 3}
     - target: {fileID: 3648667790329217543, guid: 7096f18961d9e864b82f5a95cc4e7b3f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -985,7 +1009,7 @@ RectTransform:
   m_GameObject: {fileID: 626328889}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1682679005}
@@ -1059,6 +1083,14 @@ PrefabInstance:
       propertyPath: Level.LevelSceneName
       value: Level1-3
       objectReference: {fileID: 0}
+    - target: {fileID: 3289542909338622417, guid: 7096f18961d9e864b82f5a95cc4e7b3f, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3289542909338622417, guid: 7096f18961d9e864b82f5a95cc4e7b3f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 343cff650edf47a47af3f5fa20d120f2, type: 3}
     - target: {fileID: 3648667790329217543, guid: 7096f18961d9e864b82f5a95cc4e7b3f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1637,6 +1669,14 @@ PrefabInstance:
       propertyPath: AlwaysInteractable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3289542909338622417, guid: 7096f18961d9e864b82f5a95cc4e7b3f, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3289542909338622417, guid: 7096f18961d9e864b82f5a95cc4e7b3f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 343cff650edf47a47af3f5fa20d120f2, type: 3}
     - target: {fileID: 3648667790329217543, guid: 7096f18961d9e864b82f5a95cc4e7b3f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

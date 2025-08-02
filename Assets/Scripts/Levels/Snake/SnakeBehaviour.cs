@@ -11,7 +11,7 @@ public class SnakeBehaviour : MonoBehaviour
 
 	protected SnakeMMSpringMoveCmdInvoker _invoker = new();
 
-	protected MMSpringPosition _movementSpring;
+	public MMSpringPosition _movementSpring;
 	protected MMSpringRotation _rotationSpring;
 	protected MMSpringScale _scaleSpring;
 

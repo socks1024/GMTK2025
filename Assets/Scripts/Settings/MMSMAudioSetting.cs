@@ -62,6 +62,9 @@ public class PlayerPrefSavableMMSoundManagerTrackSetting
         slider = UIObject.GetComponentInChildren<Slider>();
         toggle = UIObject.GetComponentInChildren<Toggle>();
 
+        Debug.Log(slider.name);
+        Debug.Log(toggle.name);
+
         VolumeField.Track = Track;
         VolumeField.settings = this;
         VolumeField.ConnectEvent(slider);
@@ -95,20 +98,22 @@ public class PlayerPrefSavableMMSoundManagerTrackSetting
 
     protected void OnVolumeInput(float value)
     {
-        MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, Track, value);
         _volume = value;
+        MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.SetVolumeTrack, Track, _volume);
+
+        Debug.Log(_volume);
     }
 
     protected void OnMuteInput(bool value)
     {
         if (value)
         {
-            MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.MuteTrack, Track, 0f);
+            MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.MuteTrack, Track);
             slider.interactable = false;
         }
         else
         {
-            MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.UnmuteTrack, Track, _volume);
+            MMSoundManagerTrackEvent.Trigger(MMSoundManagerTrackEventTypes.UnmuteTrack, Track);
             slider.interactable = true;
         }
     }

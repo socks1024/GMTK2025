@@ -6,7 +6,7 @@ namespace Tools.DataPersistence.PlayerPref {
         public override void ConnectEvent(Slider eventHandler)
         {
             base.ConnectEvent(eventHandler);
-            eventHandler.onValueChanged.AddListener(HandlerWriteValue);
+            eventHandler.onValueChanged.AddListener((f) => HandlerWriteValue?.Invoke(f));
         }
 
         protected override float ConvertValue(string value)

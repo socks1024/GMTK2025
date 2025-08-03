@@ -1441,8 +1441,17 @@ MonoBehaviour:
           ButtonText: Automatic Shaker Setup
         Owner: {fileID: 7144867713486163950}
         DebugActive: 0
-        Sfx: {fileID: 8300000, guid: 7478151cf36724a7dada558f746c3633, type: 3}
-        RandomSfx: []
+        Sfx: {fileID: 8300000, guid: 5d6ae56c16ed57441a656b7f21fb52cd, type: 3}
+        RandomSfx:
+        - {fileID: 8300000, guid: 5cf43e007658a324282c78ea432b9907, type: 3}
+        - {fileID: 8300000, guid: 37915ee9345fa5a4cb58507e03b0f892, type: 3}
+        - {fileID: 8300000, guid: 18f695dfb526f7f4ba2683d8483f0a40, type: 3}
+        - {fileID: 8300000, guid: 4b62e247be38ea24b971ea5cf3288c73, type: 3}
+        - {fileID: 8300000, guid: 9a69803ad817ec843b45477de5aabc07, type: 3}
+        - {fileID: 8300000, guid: 6ae4e467bb5d6494a993933454615582, type: 3}
+        - {fileID: 8300000, guid: e4c5ed04ff500e34a9fda82b1d672b45, type: 3}
+        - {fileID: 8300000, guid: a90aa0af3beb6234b839ae6c196d8427, type: 3}
+        - {fileID: 8300000, guid: 0cbd071208699a24bbbfeb54c7a9a6f1, type: 3}
         SequentialOrder: 0
         SequentialOrderHoldLast: 0
         SequentialOrderHoldCooldownDuration: 2
@@ -1457,7 +1466,7 @@ MonoBehaviour:
         AudioGroup: {fileID: 0}
         RecycleAudioSource: {fileID: 0}
         Loop: 0
-        Persistent: 0
+        Persistent: 1
         DoNotPlayIfClipAlreadyPlaying: 0
         StopSoundOnFeedbackStop: 0
         Fade: 0

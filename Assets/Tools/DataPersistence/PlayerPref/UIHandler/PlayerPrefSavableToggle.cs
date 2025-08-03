@@ -6,7 +6,7 @@ namespace Tools.DataPersistence.PlayerPref {
         public override void ConnectEvent(Toggle eventHandler)
         {
             base.ConnectEvent(eventHandler);
-            eventHandler.onValueChanged.AddListener(HandlerWriteValue);
+            eventHandler.onValueChanged.AddListener((f) => HandlerWriteValue?.Invoke(f));
         }
 
         protected override bool ConvertValue(string value)

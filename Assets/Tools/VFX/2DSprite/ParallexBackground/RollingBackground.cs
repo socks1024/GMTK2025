@@ -24,6 +24,8 @@ public class RollingBackground : MonoBehaviour
 
     public Transform EndPoint;
 
+    public bool Horizontal = false;
+
     void Start()
     {
         for (int i = 0; i < layers.Count; i++) 
@@ -34,6 +36,7 @@ public class RollingBackground : MonoBehaviour
             currLayer.Speed = layers[i].Speed;
             currLayer.LayerImage = currLayer.Layer.GetComponent<Image>();
             currLayer.LayerTransform = currLayer.Layer.transform;
+            currLayer.LayerTransform.position = EndPoint.position;
 
             currLayer.subLayerTransform = Instantiate(currLayer.Layer, currLayer.LayerTransform.parent).transform;
             currLayer.subLayerTransform.position = (EndPoint.position + StartPoint.position)/2;
@@ -45,21 +48,45 @@ public class RollingBackground : MonoBehaviour
 
     void Update()
     {
-        for(int i = 0; i < layers.Count; i++)
+        if (Horizontal)
         {
-            layers[i].LayerTransform.position += Vector3.down * layers[i].Speed * TotalSpeed;
-
-            layers[i].subLayerTransform.position += Vector3.down * layers[i].Speed * TotalSpeed;
-
-            if (layers[i].LayerTransform.position.y < EndPoint.position.y)
+            for(int i = 0; i < layers.Count; i++)
             {
-                layers[i].LayerTransform.position = StartPoint.position;
+                layers[i].LayerTransform.position += Vector3.right * layers[i].Speed * TotalSpeed * Time.deltaTime;
+
+                layers[i].subLayerTransform.position += Vector3.right * layers[i].Speed * TotalSpeed * Time.deltaTime;
+
+                if (layers[i].LayerTransform.position.x > EndPoint.position.x)
+                {
+                    layers[i].LayerTransform.position = StartPoint.position;
+                }
+
+                if (layers[i].subLayerTransform.position.x > EndPoint.position.x)
+                {
+                    layers[i].subLayerTransform.position = StartPoint.position;
+                }
+            }
+        }
+        else
+        {
+
+            for(int i = 0; i < layers.Count; i++)
+            {
+                layers[i].LayerTransform.position += Vector3.down * layers[i].Speed * TotalSpeed;
+
+                layers[i].subLayerTransform.position += Vector3.down * layers[i].Speed * TotalSpeed;
+
+                if (layers[i].LayerTransform.position.y < EndPoint.position.y)
+                {
+                    layers[i].LayerTransform.position = StartPoint.position;
+                }
+
+                if (layers[i].subLayerTransform.position.y < EndPoint.position.y)
+                {
+                    layers[i].subLayerTransform.position = StartPoint.position;
+                }
             }
 
-            if (layers[i].subLayerTransform.position.y < EndPoint.position.y)
-            {
-                layers[i].subLayerTransform.position = StartPoint.position;
-            }
         }
     }
 }
